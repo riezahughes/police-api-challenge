@@ -1,23 +1,48 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
+import Navigation from './components/navigation';
+import Searchbar from './components/searchbar';
+import MapBackground from './components/map';
+
 function App() {
+  // const [favourites, setFavourites] = useState([]);
+
+  const [viewport, setViewport] = useState(
+    {
+      width: '100vw',
+      height: '100vh',
+      latitude: 54.36060950142795,
+      longitude: -3.8983213425061107,
+      zoom: 5.2,
+    },
+  );
+
+  const updateViewport = (e) => {
+    setViewport(e);
+  };
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        setViewport({
+          width: '100vw',
+          height: '100vh',
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+          zoom: 16,
+        });
+      });
+    }
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MapBackground viewport={viewport} update={updateViewport} />
+      <div id="bodyContainer">
+        <Navigation />
+        <Searchbar />
+      </div>
     </div>
   );
 }
