@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
+import Container from '@material-ui/core/Container';
 import Navigation from './components/navigation';
 import Searchbar from './components/searchbar';
 import MapBackground from './components/map';
@@ -17,6 +18,12 @@ function App() {
       zoom: 5.2,
     },
   );
+
+  const [mapActive, setMapActive] = useState(false);
+
+  const updateMapActive = () => {
+    setMapActive((previousState) => !previousState);
+  };
 
   const updateViewport = (e) => {
     setViewport(e);
@@ -38,11 +45,18 @@ function App() {
 
   return (
     <div className="App">
-      <MapBackground viewport={viewport} update={updateViewport} />
-      <div id="bodyContainer">
-        <Navigation />
-        <Searchbar />
-      </div>
+      <MapBackground
+        active={mapActive}
+        updateActiveState={updateMapActive}
+        viewport={viewport}
+        update={updateViewport}
+      />
+      <Container maxWidth="md">
+        <div id="bodyContainer">
+          <Navigation />
+          <Searchbar />
+        </div>
+      </Container>
     </div>
   );
 }
