@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Navigation from './components/navigation';
 import Searchbar from './components/searchbar';
 import MapBackground from './components/map';
@@ -37,7 +37,7 @@ function App() {
           height: '100vh',
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
-          zoom: 16,
+          zoom: 5.2,
         });
       });
     }
@@ -45,18 +45,26 @@ function App() {
 
   return (
     <div className="App">
-      <MapBackground
-        active={mapActive}
-        updateActiveState={updateMapActive}
-        viewport={viewport}
-        update={updateViewport}
-      />
-      <Container maxWidth="md">
-        <div id="bodyContainer">
-          <Navigation />
-          <Searchbar />
-        </div>
-      </Container>
+      <div id="bodyContainer">
+        <Grid
+          container
+        >
+          <Grid item size="xs">
+            <Navigation />
+          </Grid>
+          <Grid item>
+            <MapBackground
+              active={mapActive}
+              updateActiveState={updateMapActive}
+              viewport={viewport}
+              update={updateViewport}
+            />
+          </Grid>
+          <Grid item>
+            <Searchbar />
+          </Grid>
+        </Grid>
+      </div>
     </div>
   );
 }

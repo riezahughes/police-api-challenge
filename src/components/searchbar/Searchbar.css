@@ -2,3 +2,25 @@
     position: relative;
     z-index: 20;
 }
+
+#crimeSearchConfirm{
+    width: 95%;
+    margin-top: 10px;
+}
+
+.beforeDate, .afterDate{
+    width:95%;
+}
+
+.beforeDate::before{
+    content: "Start Date";
+    width: 70px;
+    padding-top: 5px;
+    text-align: left;
+}
+.afterDate::before{
+    content: "End Date";
+    width: 70px;
+    padding-top: 5px;
+    text-align: left;
+}

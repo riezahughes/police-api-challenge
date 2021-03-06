@@ -1,0 +1,17 @@
+#navBarContainer{
+    height: 100vh;
+    background: white;
+    width: 50px;
+    z-index: 20;
+}
+
+#NavbarLeft{
+    text-align: center;
+    padding: 10px;
+}
+
+#navBarLeft ul{
+    display: inline;
+    list-style: none;
+}
+
